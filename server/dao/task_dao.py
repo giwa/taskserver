@@ -8,7 +8,6 @@ class TaskDao(GetOp):
         self._m = Task
 
     def create(self, name, description):
-        with self._s.begin():
-            task = Task(name=name, descciption=description)
-            self._s.add(task)
-            return task
+        task = Task(name=name, description=description)
+        self._s.add(task)
+        return task

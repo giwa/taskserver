@@ -13,7 +13,7 @@ Schema = namedtuple("Schema", "task tasks web webs file files user users visit v
 class Context:
     def __init__(self):
         self.app = Flask(__name__)
-        Session = sessionmaker(bind=engine)
+        Session = sessionmaker(bind=engine, autocommit=True)
         self._session = Session()
         self.dao = None
         self.scheme = None
