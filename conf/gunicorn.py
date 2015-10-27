@@ -15,7 +15,7 @@ debug = False
 spew = False
 
 # Logging
-logfile = '/home/ken/log/gunicorn/task_server_gunicon.log'
+logfile = '/home/ken/apps/log/gunicorn/task_server_gunicon.log'
 loglevel = 'info'
 logconfig = None
 
