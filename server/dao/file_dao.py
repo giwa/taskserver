@@ -16,11 +16,10 @@ class FileDao(GetOp):
         return file
 
     def create_with_task_web(self, name, uri, kind, task, web):
-        with self._s.begin():
-            file = File(name=name, uri=uri, kind=kind)
-            if task:
-                task.files.append(file)
-            if web:
-                web.files.append(file)
-            self._s.add(file)
+        file = File(name=name, uri=uri, kind=kind)
+        if task:
+            task.files.append(file)
+        if web:
+            web.files.append(file)
+        self._s.add(file)
         return file

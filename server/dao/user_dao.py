@@ -8,11 +8,9 @@ class UserDao(GetOp):
         self._m = User
 
     def get_by_src_ip(self, src_ip):
-        with self._s.begin():
-            user = self._s.query(User).filter_by(src_ip=src_ip)
-            return user
+        user = self._s.query(User).filter_by(src_ip=src_ip)
+        return user
 
     def get_by_date(self, date):
-        with self._s.begin():
-            users = self._s.query(User).filter_by(date=date)
-            return users
+        users = self._s.query(User).filter_by(date=date)
+        return users
