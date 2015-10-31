@@ -55,6 +55,7 @@ class Visit(DBMixin, Base):
 
     user_id = Column(Integer, ForeignKey("user.id"))
     web_id = Column(Integer, ForeignKey("web.id"))
+    kind = Column(String(128), index=True)
     stay = Column(Float)
     timestamp = Column(DateTime)
 
