@@ -1,8 +1,12 @@
+#! /usr/bin/env python
+
+# Generate data from sqlite which created by negi(sqlite storage version)
+# dump the result with json format in data directory
+
 import os
 from glob import glob
 import json
 from multiprocessing import Process
-
 
 from interop.browsing_hitstory import BrowsingHistory
 from interop.http_result import HTTPResult
@@ -42,6 +46,7 @@ def filtered_main():
         for r in record_generator():
             browsing_history.add_http_result(r)
 
+
 def non_filtered_main():
     with open("./data/non_filter_http_record.json", 'w') as f:
         def callback(http_comm):
@@ -52,6 +57,7 @@ def non_filtered_main():
         for r in record_generator():
             browsing_history.add_http_result_without_filter(r)
 
+
 def count_get():
     """
     List up all record which has GET as condition
@@ -61,6 +67,7 @@ def count_get():
             if r.pattern == "GET":
                 f.write(r.to_json())
                 f.write("\n")
+
 
 def get_all():
     """
@@ -83,7 +90,6 @@ def get_uniq_url():
             records.append(r)
 
     uniq_urls = set(map(lambda x: x['url'], records))
-    print(len(uniq_urls))
     with open("./data/unq_uri.json", 'w') as u:
         for uri in uniq_urls:
             u.write(uri)
