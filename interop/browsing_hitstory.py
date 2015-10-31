@@ -15,10 +15,7 @@ class BrowsingHistory:
         self._callback_f = callback
 
     def add_http_result(self, http_result):
-        http_comm = HTTPCommunicationModel(http_result.id, http_result.src_ip,
-                                           http_result.dst_ip, http_result.src_port,
-                                           http_result.dst_port, http_result.timestamp,
-                                           http_result.stream_id)
+        http_comm = self.to_http_comm(http_result)
 
         key = http_comm.five_tuple_key
         if http_result.pattern == 'GET':
@@ -52,10 +49,42 @@ class BrowsingHistory:
                         self._callback_f(self._http_comms[key])
                 del self._http_comms[key]
 
+        self._gc_manager()
+
+    def add_http_result_without_filter(self, http_result):
+        http_comm = self.to_http_comm(http_result)
+
+        key = http_comm.five_tuple_key
+        if http_result.pattern == 'GET':
+            http_comm.uri = http_result.result
+            self._http_comms[key] = http_comm
+
+        if http_result.pattern == 'Host:':
+            if key not in self._http_comms:
+                return
+
+            if self._http_comms[key].stream_id == http_comm.stream_id:
+                self._http_comms[key].host = http_result.result
+                self._callback_f(self._http_comms[key])
+
+        self._gc_manager()
+
+    def _gc_manager(self):
         self._counter += 1
         if self._counter > 100000:
             self._gc()
             self._counter = 0
+
+    @staticmethod
+    def to_http_comm(http_result):
+        """
+        convert HttpResult to HttpCommnication
+        """
+        return HTTPCommunicationModel(http_result.id, http_result.src_ip,
+                                           http_result.dst_ip, http_result.src_port,
+                                           http_result.dst_port, http_result.timestamp,
+                                           http_result.stream_id)
+
 
     def _is_http_comm_valid(self, key):
         http_comm = self._http_comms[key]
