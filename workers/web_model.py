@@ -1,4 +1,3 @@
-
 from bs4 import BeautifulSoup
 
 # 2to3 conpatibility
@@ -16,7 +15,6 @@ class WebModel:
         self._content_length = content_length
         self._url = url
 
-
     @property
     def host(self):
         template = "{scheme}://{netloc}"
@@ -30,6 +28,8 @@ class WebModel:
         Return link in a html file
         if herf is relative path, convert it to absolute path
         """
+        # TODO: implement using ds4
+
     @property
     def html(self):
         return self._http_response_body
@@ -39,12 +39,15 @@ class WebModel:
         """
         Return text after remove html tag
         """
+        # TODO: implement using ds4
 
     @property
     def wakachi(self):
         """
         Return parsed text file with wakachi gaki
         """
+        # TODO: implement using mecab
+
     @property
     def http_status(self):
         """
@@ -59,6 +62,11 @@ class WebModel:
     @property
     def content_length(self):
         return self._content_length
+
+    @property
+    def hashed_url(self):
+        # TODO : implment using hashlib
+
 
     def __len__(self):
         if self.content_length():
@@ -75,6 +83,6 @@ class WebModel:
 
     @staticmethod
     def from_requests_error():
+        # TODO: implement
         pass
-
 

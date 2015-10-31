@@ -3,6 +3,7 @@ from tempfile import NamedTemporaryFile
 from task_server_api import TaskServerAPI
 from ss_file_uploader import SsFileUploader
 
+
 class WebManager:
     def __init__(self, task_name, web):
         self._task_name = task_name
@@ -27,6 +28,7 @@ class WebManager:
 
         return web_id
         """
+        # TODO: implement after clean up api in meta server
 
 
     def _upload_files(self, web_id):
