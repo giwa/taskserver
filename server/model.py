@@ -53,18 +53,12 @@ class User(DBMixin, Base):
 
 class Visit(DBMixin, Base):
 
-    url = Column(Text)
-    hashed_url = Column(String(32), index=True)
+    user_id = Column(Integer, ForeignKey("user.id"))
+    web_id = Column(Integer, ForeignKey("web.id"))
     stay = Column(Float)
     timestamp = Column(DateTime)
 
-
-class UserVisit(AssociationMixin, Base):
-
-    user_id = Column(Integer, ForeignKey("user.id"))
-    visit_id = Column(Integer, ForeignKey("visit.id"))
-
-Index('user_visit_idx', UserVisit.user_id, UserVisit.visit_id, unique=True)
+Index('user_web_idx', Visit.web_id, Visit.user_id, unique=True)
 
 
 class Web(DBMixin, Base):
