@@ -55,6 +55,7 @@ class Visit(DBMixin, Base):
 
     user_id = Column(Integer, ForeignKey("user.id"))
     web_id = Column(Integer, ForeignKey("web.id"))
+    # kind represent type of visit to distingush main or sub
     kind = Column(String(128), index=True)
     stay = Column(Float)
     timestamp = Column(DateTime)
@@ -71,6 +72,9 @@ class Web(DBMixin, Base):
     title = Column(Text)
     host = Column(String(512))
     files = relationship("File", backref="web")
+    content_type = Column(String(128), index=True)
+    content_length = Column(Integer)
+    kind = Column(String(128), index=True)
 
 
 class File(DBMixin, Base):
@@ -87,4 +91,6 @@ class Task(DBMixin, Base):
     webs = relationship('Web', backref='task')
     files = relationship('File', backref='task')
     name = Column(String(1024))
+    kind = Column(String(128), index=True)
+
     description = Column(Text)
