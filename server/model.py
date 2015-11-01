@@ -2,11 +2,11 @@ import datetime
 import re
 
 from sqlalchemy import (create_engine,
-        Column, Integer, String, ForeignKey,
-        DateTime, Date, Text, Float, Index)
-from sqlalchemy.orm import relationship, backref
+                        Column, Integer, String, ForeignKey,
+                        DateTime, Date, Text, Float, Index)
+from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declared_attr, declarative_base
-from sqlalchemy.orm import class_mapper
+
 
 def underscore_case(name):
     s1 = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
@@ -18,6 +18,7 @@ Base = declarative_base()
 # connect to mysql db
 # echo True is debugging purpose
 engine = create_engine('mysql+mysqldb://ken:ken@localhost/gm', echo=True)
+
 
 class DBMixin:
 

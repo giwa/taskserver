@@ -2,13 +2,14 @@ from collections import namedtuple
 from sqlalchemy.orm import sessionmaker
 from flask import Flask
 
-
 from server.model import engine
 from server.dao import FileDao, TaskDao, UserDao, VisitDao, WebDao
 from server.schema import TaskSchema, WebSchema, FileSchema, UserSchema, VisitSchema
 
+
 Dao = namedtuple("Dao", "file task user visit web")
 Schema = namedtuple("Schema", "task tasks web webs file files user users visit visits")
+
 
 class Context:
     def __init__(self):
@@ -42,4 +43,3 @@ class Context:
             VisitSchema(),
             VisitSchema(many=True)
         )
-
