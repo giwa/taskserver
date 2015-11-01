@@ -81,10 +81,9 @@ class BrowsingHistory:
         convert HttpResult to HttpCommnication
         """
         return HTTPCommunicationModel(http_result.id, http_result.src_ip,
-                                           http_result.dst_ip, http_result.src_port,
-                                           http_result.dst_port, http_result.timestamp,
-                                           http_result.stream_id)
-
+                                      http_result.dst_ip, http_result.src_port,
+                                      http_result.dst_port, http_result.timestamp,
+                                      http_result.stream_id)
 
     def _is_http_comm_valid(self, key):
         http_comm = self._http_comms[key]

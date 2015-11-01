@@ -55,7 +55,7 @@ class Visit(DBMixin, Base):
 
     user_id = Column(Integer, ForeignKey("user.id"))
     web_id = Column(Integer, ForeignKey("web.id"))
-    # kind represent type of visit to distingush main or sub
+    # kind represent type of visit to distinguish main or sub
     kind = Column(String(128), index=True)
     stay = Column(Float)
     timestamp = Column(DateTime)
