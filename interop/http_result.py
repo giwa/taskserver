@@ -37,4 +37,10 @@ class HTTPResult:
                 yield self._format_result(row)
 
     def _format_result(self, row):
+        """
+
+        :rtype HTTPResultModel
+        :param row:
+        :return:
+        """
         return HTTPResultModel(*row)

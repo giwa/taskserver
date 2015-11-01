@@ -1,7 +1,7 @@
 from tempfile import NamedTemporaryFile
 
-from task_server_api import TaskServerAPI
-from ss_file_uploader import SsFileUploader
+from .meta_server_api import MetaServerAPI
+from .ss_file_uploader import SsFileUploader
 
 
 class WebManager:
@@ -13,7 +13,7 @@ class WebManager:
         self._text_file = None
         self._wakachi_file = None
         self._uploader = SsFileUploader(self._task_name)
-        self._api = TaskServerAPI(self._task_name)
+        self._api = MetaServerAPI(self._task_name)
 
     def register_result(self):
         web_id = self._register_web()
@@ -29,7 +29,6 @@ class WebManager:
         return web_id
         """
         # TODO: implement after clean up api in meta server
-
 
     def _upload_files(self, web_id):
         """

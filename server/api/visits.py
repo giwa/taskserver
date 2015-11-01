@@ -1,8 +1,7 @@
 from flask import Blueprint, request, abort
 
 from server import di
-f
-om server.util import mjsonify
+from server.util import mjsonify
 
 cxt = di.cxt
 visit_bp = Blueprint('visit_api', __name__)

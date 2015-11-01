@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 
 # 2to3 conpatibility
-try
+try:
     from urllib.parse import urlparse
 except ImportError:
     from urlparse import urlparse
@@ -17,6 +17,10 @@ class WebModel:
 
     @property
     def host(self):
+        """
+
+        :rtype str
+        """
         template = "{scheme}://{netloc}"
         o = urlparse(self._url)
         host = template.format(scheme=o.scheme, netloc=o.netloc)
@@ -26,7 +30,9 @@ class WebModel:
     def links(self):
         """
         Return link in a html file
-        if herf is relative path, convert it to absolute path
+        if href is relative path, convert it to absolute path
+
+        :rtype list[str]
         """
         # TODO: implement using ds4
 
@@ -52,21 +58,36 @@ class WebModel:
     def http_status(self):
         """
         Return http status code
+
+        :rtype int
         """
         return self._http_status
 
     @property
     def content_type(self):
+        """
+
+        :rtype str
+        :return: content type
+        """
         return self._content_type
 
     @property
     def content_length(self):
+        """
+
+        :rtype int
+        """
         return self._content_length
 
     @property
     def hashed_url(self):
-        # TODO : implment using hashlib
+        """
 
+        :rtype str
+        :return:
+        """
+        # TODO : implment using hashlib
 
     def __len__(self):
         if self.content_length():
@@ -76,7 +97,13 @@ class WebModel:
 
     @staticmethod
     def from_requests_response(resp):
-        w = Web(resp.url, resp.text, resp.status_code,
+        """
+
+        :rtype WebModel
+        :param resp:
+        :return:
+        """
+        w = WebModel(resp.url, resp.text, resp.status_code,
                 resp.headers.get("content-type"),
                 resp.headers.get("content-length"))
         return w

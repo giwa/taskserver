@@ -7,4 +7,4 @@ status_bp = Blueprint('status_api', __name__)
 @status_bp.route("", methods=["GET"])
 def get_status():
     d = dict(status='up')
-    return mjsonify(m)
+    return mjsonify(d)
