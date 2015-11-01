@@ -1,10 +1,12 @@
 from bs4 import BeautifulSoup
 
+from .wakachi import Wakachi
+
 # 2to3 conpatibility
 try:
-    from urllib.parse import urlparse
-except ImportError:
     from urlparse import urlparse
+except ImportError:
+    from urllib.parse import urlparse
 
 
 class WebModel:
@@ -14,6 +16,8 @@ class WebModel:
         self._content_type = content_type
         self._content_length = content_length
         self._url = url
+        self._wakachi = Wakachi()
+        self._bs = BeautifulSoup(self._http_response_body)
 
     @property
     def host(self):
@@ -34,7 +38,15 @@ class WebModel:
 
         :rtype list[str]
         """
-        # TODO: implement using ds4
+        links = list()
+        for link in self._bs.find_all('a'):
+            href = link.get('href')
+            if href:
+                # :type href str
+                if href.startswith("/"):
+                    href = self.host + href
+                links.append(href)
+        return links
 
     @property
     def html(self):
@@ -44,15 +56,17 @@ class WebModel:
     def text(self):
         """
         Return text after remove html tag
+
+        :rtype str
         """
-        # TODO: implement using ds4
+        return self._bs.get_text()
 
     @property
     def wakachi(self):
         """
         Return parsed text file with wakachi gaki
         """
-        # TODO: implement using mecab
+        return list(self._wakachi.parse(self.text))
 
     @property
     def http_status(self):
