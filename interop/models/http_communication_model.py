@@ -116,6 +116,3 @@ class HTTPCommunicationModel(BaseModel):
                  url=self.url,
                  title=self.title)
         return json.dumps(d, cls=DatetimeEncoder)
-
-
-

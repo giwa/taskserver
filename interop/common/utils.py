@@ -2,7 +2,9 @@ import json
 from datetime import datetime, timedelta, date
 from itertools import tee
 
+
 datetime_str_format = "%Y-%m-%d %H:%M:%S"
+
 
 def parse_timestamp(timestamp):
     """
