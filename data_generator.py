@@ -15,6 +15,8 @@ from interop.http_result import HTTPResult
 def get_sqlites(day=None):
     """
     Extract all record from sqlite
+
+    :rtype str
     """
     sqlite_path = '/Users/ken/west/master/sqlite/'
     sqlite_dirs = os.listdir(sqlite_path)
@@ -29,6 +31,8 @@ def get_sqlites(day=None):
 def record_generator(day=None):
     """
     Convert sqlite record to HTTPResult
+
+    :rtype HTTPResult
     """
     for sqlite_db in get_sqlites(day):
         http_results = HTTPResult(sqlite_db)
@@ -97,7 +101,7 @@ def get_uniq_url():
 
 
 if __name__ == '__main__':
-    ps = []
+    ps = list()
     ps.append(Process(target=non_filtered_main))
     ps.append(Process(target=filtered_main))
     ps.append(Process(target=get_all))
