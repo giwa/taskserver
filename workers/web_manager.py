@@ -34,12 +34,12 @@ class WebManager:
         """
         Upload files to ss
         """
-        self._upload_link_file(web_id)
-        self._upload_text_file(web_id)
-        self._upload_html_file(web_id)
-        self._upload_wakachi_file(web_id)
+        self.upload_link_file(web_id)
+        self.upload_text_file(web_id)
+        self.upload_html_file(web_id)
+        self.upload_wakachi_file(web_id)
 
-    def _upload_html_file(self, web_id):
+    def upload_html_file(self, web_id):
         """
         Write html to a file
         """
@@ -50,7 +50,7 @@ class WebManager:
         file_ext = "html"
         self._uploader.upload(self._html_file, file_name, file_ext)
 
-    def _upload_link_file(self, web_id):
+    def upload_link_file(self, web_id):
         """
         Write links into a file
         """
@@ -63,7 +63,7 @@ class WebManager:
         file_ext = "txt"
         self._uploader.upload(self._link_file, file_name, file_ext)
 
-    def _upload_text_file(self, web_id):
+    def upload_text_file(self, web_id):
         """
         Remove html tag and write to a file
         """
@@ -74,7 +74,7 @@ class WebManager:
         file_ext = "txt"
         self._uploader.upload(self._text_file, file_name, file_ext)
 
-    def _upload_wakachi_file(self, web_id):
+    def upload_wakachi_file(self, web_id):
         """
         write wachied data to a file
         """

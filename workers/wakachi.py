@@ -11,10 +11,16 @@ pat_sep = re.compile(sep)
 class Wakachi:
     def __init__(self):
         pkg_dir = os.path.dirname(os.path.realpath(__file__))
-        mecab_mode = 'mecabrc -u %s/wikipedia.dic' % pkg_dir
+        mecab_mode = 'mecabrc -u %s/mcdict/wikipedia.dic' % pkg_dir
         self._tagger = MeCab.Tagger(mecab_mode)
 
     def parse(self, text):
+        """
+
+        :rtype list[str]
+        :param text:
+        :return:
+        """
         words = [word for word, word_type in self._parse2word(text) if word_type == '名詞']
         # filter for removing one charactor
         filtered_words = filter(lambda word: len(word[0]) > 1, words)
