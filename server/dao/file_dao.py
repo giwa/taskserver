@@ -1,10 +1,11 @@
 from server.model import File
 from server.dao.concerns.get_op import GetOp
+from server.dao.sa_dao import SADao
 
-class FileDao(GetOp):
+class FileDao(SADao, GetOp):
 
-    def __init__(self, session):
-        self._s = session
+    def __init__(self, cxt):
+        self._s = cxt._session
         self._m = File
 
     def create(self, name, uri, kind):
@@ -21,5 +22,5 @@ class FileDao(GetOp):
             task.files.append(file)
         if web:
             web.files.append(file)
-        self._s.add(file)
+        self._refresh(file)
         return file

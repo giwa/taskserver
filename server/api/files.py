@@ -7,14 +7,14 @@ cxt = di.cxt
 file_bp = Blueprint('file_api', __name__)
 
 
-@file_bp.route("", ['GET'])
+@file_bp.route("", methods=['GET'])
 def list_files():
     files = cxt.dao.file.get_list()
     rs = cxt.scheme.files.dump(files).data
     return mjsonify(rs)
 
 
-@file_bp.route("/<int:id>", ["GET"])
+@file_bp.route("/<int:id>", methods=["GET"])
 def get_file(id):
     file = cxt.dao.file.get_by_id(id)
     if not file:
@@ -23,7 +23,7 @@ def get_file(id):
     return mjsonify(rs)
 
 
-@file_bp.route("", ["POST"])
+@file_bp.route("", methods=["POST"])
 def create_file():
     r = request.get_json(force=True)
     if not r:

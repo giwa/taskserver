@@ -48,28 +48,28 @@ class AssociationMixin:
 
 class User(DBMixin, Base):
 
-    src_ip = Column(String(15))
-    date = Column(Date)
+    src_ip = Column(String(15), nullable=False)
+    date = Column(Date, nullable=False)
 
 
 class Visit(DBMixin, Base):
 
-    user_id = Column(Integer, ForeignKey("user.id"))
-    web_id = Column(Integer, ForeignKey("web.id"))
+    user_id = Column(Integer, ForeignKey("user.id"), nullable=False)
+    web_id = Column(Integer, ForeignKey("web.id"), nullable=False)
     # kind represent type of visit to distinguish main or sub
     kind = Column(String(128), index=True)
     stay = Column(Float)
-    timestamp = Column(DateTime)
+    timestamp = Column(DateTime, nullable=False)
 
 Index('user_web_idx', Visit.web_id, Visit.user_id, unique=True)
 
 
 class Web(DBMixin, Base):
 
-    task_id = Column(Integer, ForeignKey("task.id"))
-    url = Column(Text)
+    task_id = Column(Integer, ForeignKey("task.id"), nullable=False)
+    url = Column(Text, nullable=False)
     hashed_url = Column(String(32), index=True)
-    http_status = Column(Integer)
+    http_status = Column(Integer, nullable=False)
     title = Column(Text)
     host = Column(String(512))
     files = relationship("File", backref="web")
@@ -81,7 +81,7 @@ class Web(DBMixin, Base):
 class File(DBMixin, Base):
 
     web_id = Column(Integer, ForeignKey("web.id"))
-    task_id = Column(Integer, ForeignKey("task.id"))
+    task_id = Column(Integer, ForeignKey("task.id"), nullable=False)
     name = Column(String(1024))
     uri = Column(Text)
     kind = Column(String(128), index=True)
@@ -91,7 +91,6 @@ class Task(DBMixin, Base):
 
     webs = relationship('Web', backref='task')
     files = relationship('File', backref='task')
-    name = Column(String(1024))
+    name = Column(String(1024), nullable=False)
     kind = Column(String(128), index=True)
-
     description = Column(Text)

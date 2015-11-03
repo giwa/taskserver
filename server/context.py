@@ -23,11 +23,11 @@ class Context:
 
     def _init_daos(self):
         self.dao = Dao(
-            FileDao(self._session),
-            TaskDao(self._session),
-            UserDao(self._session),
-            VisitDao(self._session),
-            WebDao(self._session)
+            FileDao(self),
+            TaskDao(self),
+            UserDao(self),
+            VisitDao(self),
+            WebDao(self)
         )
 
     def _init_schemas(self):
