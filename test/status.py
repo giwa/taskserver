@@ -1,7 +1,7 @@
-import unittest
 import json
 
-from rest_test_suite import RestTestSuite
+from test.rest_test_suite import RestTestSuite
+
 
 class StatusAPITest(RestTestSuite):
     def test_status(self):
@@ -12,7 +12,3 @@ class StatusAPITest(RestTestSuite):
         j = json.loads(r.data.decode("utf-8"))
         d = dict(status="up")
         self.assertEqual(j, d)
-
-
-if __name__ == '__main__':
-    unittest.main()

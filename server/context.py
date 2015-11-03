@@ -4,7 +4,7 @@ from flask import Flask
 
 from server.model import engine
 from server.dao import FileDao, TaskDao, UserDao, VisitDao, WebDao
-from server.schema import TaskSchema, WebSchema, FileSchema, UserSchema, VisitSchema
+from server.schemas import TaskSchema, WebSchema, FileSchema, UserSchema, VisitSchema
 
 
 Dao = namedtuple("Dao", "file task user visit web")
