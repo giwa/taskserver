@@ -7,14 +7,14 @@ cxt = di.cxt
 web_bp = Blueprint('web_api', __name__)
 
 
-@web_bp.route("", ['GET'])
+@web_bp.route("", methods=['GET'])
 def list_webs():
     webs = cxt.dao.web.get_list()
     rs = cxt.scheme.webs.dump(webs).data
     return mjsonify(rs)
 
 
-@web_bp.route("/<int:id>", ["GET"])
+@web_bp.route("/<int:id>", methods=["GET"])
 def get_web(id):
     web = cxt.dao.web.get_by_id(id)
     if not web:
@@ -23,7 +23,7 @@ def get_web(id):
     return mjsonify(rs)
 
 
-@web_bp.route("", ["POST"])
+@web_bp.route("", methods=["POST"])
 def create_web():
     r = request.get_json(force=True)
     if not r:
