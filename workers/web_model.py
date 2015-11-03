@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 
-from .wakachi import Wakachi
+from wakachi import Wakachi
 
 # 2to3 conpatibility
 try:
