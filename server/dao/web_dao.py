@@ -1,10 +1,11 @@
 from server.model import Web
 from server.dao.concerns.get_op import GetOp
+from server.dao.sa_dao import SADao
 
-class WebDao(GetOp):
+class WebDao(SADao, GetOp):
 
-    def __init__(self, session):
-        self._s = session
+    def __init__(self, cxt):
+        self._s = cxt._session
         self._m = Web
 
     def create(self, url, hashed_url, http_status, title, host):
@@ -23,5 +24,5 @@ class WebDao(GetOp):
             task.webs.append(web)
         for f in files:
             web.files.append(f)
-        self._s.add(web)
+        self._refresh(web)
         return web
