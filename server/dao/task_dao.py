@@ -8,7 +8,7 @@ class TaskDao(SADao, GetOp):
         self._s = cxt._session
         self._m = Task
 
-    def create(self, name, description):
-        task = Task(name=name, description=description)
+    def create(self, name, kind, description):
+        task = Task(name=name, kind=kind, description=description)
         self._refresh(task)
         return task

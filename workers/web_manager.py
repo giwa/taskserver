@@ -1,7 +1,6 @@
 from tempfile import NamedTemporaryFile
-
-from meta_server_api import MetaServerAPI
-from ss_file_uploader import SsFileUploader
+from workers.meta_server_api import MetaServerAPI
+from workers.ss_file_uploader import SsFileUploader
 
 
 class WebManager:

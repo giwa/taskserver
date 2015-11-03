@@ -29,14 +29,13 @@ def create_web():
     if not r:
         abort(400)
     task = cxt.dao.task.get_by_id(r['task_id'])
-    web = cxt.dao.web.create_with_task_file(
+    web = cxt.dao.web.create_with_task(
         r.get('url', None),
-        r.get('hashed_url', None),
         r.get('http_status', None),
         r.get('title', None),
         r.get('host', None),
-        task,
-        r.get('files', [])
+        r.get('kind', None),
+        task
     )
     rs = cxt.scheme.web.dump(web).data
     return mjsonify(rs), 201

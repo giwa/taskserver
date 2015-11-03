@@ -25,12 +25,13 @@ def get_file(id):
 
 @file_bp.route("", methods=["POST"])
 def create_file():
+
     r = request.get_json(force=True)
     if not r:
         abort(400)
     task = cxt.dao.task.get_by_id(r['task_id'])
-    web = cxt.dao.task.get_by_id(r['web_id'])
-    file = cxt.file.create_with_task_web(
+    web = cxt.dao.web.get_by_id(r['web_id'])
+    file = cxt.dao.file.create_with_task_web(
         r.get("name", None),
         r.get("uri", None),
         r.get("kind", None),

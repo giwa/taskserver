@@ -28,6 +28,6 @@ def create_task():
     r = request.get_json(force=True)
     if not r:
         abort(400)
-    task = cxt.dao.task.create(name=r['name'], description=r['description'])
+    task = cxt.dao.task.create(name=r['name'], kind=r['kind'], description=r['description'])
     r = cxt.scheme.task.dump(task).data
     return mjsonify(r), 201
