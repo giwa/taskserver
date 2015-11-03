@@ -3,8 +3,8 @@ from server.dao.concerns.get_op import GetOp
 
 class UserDao(GetOp):
 
-    def __init__(self, session):
-        self._s = session
+    def __init__(self, cxt):
+        self._s = cxt._session
         self._m = User
 
     def get_by_src_ip(self, src_ip):
