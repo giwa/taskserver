@@ -13,4 +13,6 @@ if __name__ == '__main__':
     test_suite = test_loader.discover('./test', "*.py")
 
     # run the test suite
-    test_runner.run(test_suite)
+    r = test_runner.run(test_suite)
+    if len(r.failures) > 0 or len(r.errors) > 0:
+        exit(1)
