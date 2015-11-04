@@ -13,5 +13,5 @@ class FilesAPITest(RestTestSuite):
                 'task_id': self.task.id,
                 'web_id': self.web.id
                 }
-        r = self.app.post("/files", data=json.dumps(data))
+        r = self.client.post("/files", data=json.dumps(data))
         self.assertEqual(r.status_code, 201)

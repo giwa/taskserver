@@ -8,7 +8,7 @@ class TasksAPITest(RestTestSuite):
     def test_status(self):
         #: :type: flask.Response
         data = dict(name=self.faker.name_female(), kind=self.faker.last_name_female(), description=self.faker.text())
-        r = self.app.post("/tasks", data=json.dumps(data))
+        r = self.client.post("/tasks", data=json.dumps(data))
         self.assertEqual(r.status_code, 201)
 
         j = json.loads(r.data.decode("utf-8"))

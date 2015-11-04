@@ -17,8 +17,9 @@ class RestTestSuite(unittest.TestCase):
         session = Session()
         di.cxt._session = session
         di.cxt._init_daos()
+        app.testing = True
         #: :type: flask.testing.FlaskClient
-        cls.app = app.test_client()
+        cls.client = app.test_client()
         cls.faker = Faker()
 
         # Prepare data for test
