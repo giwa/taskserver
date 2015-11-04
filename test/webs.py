@@ -13,5 +13,5 @@ class WebsAPITest(RestTestSuite):
                 'kind': self.faker.name(),
                 'task_id': self.task.id
                 }
-        r = self.app.post("/webs", data=json.dumps(data))
+        r = self.client.post("/webs", data=json.dumps(data))
         self.assertEqual(r.status_code, 201)
