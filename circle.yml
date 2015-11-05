@@ -4,6 +4,10 @@ machine:
   python:
     version: 3.5.0
 
+dependencies:
+    pre:
+      - ./dev/init.sh
+
 test:
   override:
     - python run_tests.py
