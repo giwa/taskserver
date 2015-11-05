@@ -15,3 +15,10 @@ class WebsAPITest(RestTestSuite):
                 }
         r = self.client.post("/webs", data=json.dumps(data))
         self.assertEqual(r.status_code, 201)
+
+    def test_get_web(self):
+        r = self.client.get("/webs/{}".format(self.web.id))
+        self.assertEqual(r.status_code, 200)
+
+        j = json.loads(r.data.decode("utf-8"))
+        self.assertEqual(j['url'], self.web.url)
