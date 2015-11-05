@@ -15,3 +15,10 @@ class FilesAPITest(RestTestSuite):
                 }
         r = self.client.post("/files", data=json.dumps(data))
         self.assertEqual(r.status_code, 201)
+
+    def test_get_file(self):
+        r = self.client.get("/files/{}".format(self.file.id))
+        self.assertEqual(r.status_code, 200)
+
+        j = json.loads(r.data.decode("utf-8"))
+        self.assertEqual(j['name'], self.file.name)
