@@ -23,7 +23,7 @@ class Wakachi:
         """
         words = [word for word, word_type in self._parse2word(text) if word_type == '名詞']
         # filter for removing one charactor
-        filtered_words = filter(lambda word: len(word[0]) > 1, words)
+        filtered_words = filter(lambda word: len(word) > 1, words)
         for w in filtered_words:
             yield w
 
@@ -42,3 +42,8 @@ class Wakachi:
                 word = wakati[0]
                 word_type = wakati[1].split(',')[0]
                 yield word, word_type
+
+if __name__ == "__main__":
+    w = Wakachi()
+    ws = w.parse("涼宮ハルヒの憂鬱")
+    print(list(ws))
